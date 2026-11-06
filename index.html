@@ -291,6 +291,9 @@ const leagueTeams={
  'MLS – Conferência Oeste':['Austin FC','Colorado Rapids','FC Dallas','Houston Dynamo','Los Angeles FC','LA Galaxy','Minnesota United','Portland Timbers','Real Salt Lake','St. Louis CITY','San Diego FC','San Jose Earthquakes','Seattle Sounders','Sporting Kansas City','Vancouver Whitecaps']
 };
 const originalLeagueTeams=JSON.parse(JSON.stringify(leagueTeams));
+// Base de força utilizada pelo simulador. Garante que todos os clubes tenham
+// um valor inicial mesmo quando a base detalhada de ratings não estiver carregada.
+const clubPowerRaw=Object.fromEntries([...new Set(Object.values(leagueTeams).flat())].map(name=>[name,{v:68,source:'estimativa inicial',points:null}]));
 
 function resetLeagueTeams(){Object.keys(originalLeagueTeams).forEach(k=>{leagueTeams[k]=originalLeagueTeams[k].slice()});}
 function windowStatus(){
